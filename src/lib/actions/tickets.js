@@ -17,3 +17,8 @@ export const getTickets = async (email = "", status = "") => {
 export const updateTicket = async (id, data) => {
   return serverMutation(`/api/tickets/${id}`, data, "PATCH");
 };
+
+// for gettinf single ticket
+export const getSingleTicket = async (id) => {
+  return serverFetch(`/api/tickets/${id}`);
+};
