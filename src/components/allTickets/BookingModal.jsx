@@ -1,8 +1,13 @@
 "use client";
 
+import { bookNow } from "@/lib/actions/bookings";
+import { useSession } from "@/lib/session/client-session";
 import { useState } from "react";
 
 const BookingModal = ({ ticket, closeModal }) => {
+  const { session } = useSession();
+  console.log(ticket, "from modal");
+  const user = session?.user;
   const [quantity, setQuantity] = useState(1);
 
   const handleSubmit = async (e) => {
@@ -16,15 +21,22 @@ const BookingModal = ({ ticket, closeModal }) => {
     const bookingData = {
       ticketId: ticket._id,
       ticketTitle: ticket.title,
+      bookingDateTime: new Date().toISOString(),
+      departureDateTime: ticket.departureDateTime,
       bookingQuantity: quantity,
       totalPrice: quantity * ticket.price,
       status: "pending",
+      vendorName: ticket.vendorName,
+      vendorEmail: ticket.vendorEmail,
+      userName: user.name,
+      userEmail: user.email,
     };
 
     console.log(bookingData);
 
     // later api call
-    // await createBooking(bookingData)
+    const res = await bookNow(bookingData);
+    console.log(res, "from modal  booking");
 
     closeModal();
   };
