@@ -9,7 +9,6 @@ const BookingCard = ({ booking }) => {
 
   const showPayButton = booking.status === "accepted" && !isExpired;
 
-  //   const totalPrice = booking.price * booking.quantity;
 
   return (
     <div className="border rounded-xl p-4 shadow">
