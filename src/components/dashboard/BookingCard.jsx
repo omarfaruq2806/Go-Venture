@@ -9,12 +9,11 @@ const BookingCard = ({ booking }) => {
 
   const showPayButton = booking.status === "accepted" && !isExpired;
 
-
   return (
     <div className="border rounded-xl p-4 shadow">
       <img src={booking.image} className="w-full h-40 object-cover rounded" />
 
-      <h2 className="text-lg font-bold mt-2">{booking.title}</h2>
+      <h2 className="text-lg font-bold mt-2">{booking.ticketTitle}</h2>
 
       <p>
         {booking.from} → {booking.to}
@@ -35,9 +34,17 @@ const BookingCard = ({ booking }) => {
 
       {/* Pay button */}
       {showPayButton && (
-        <button className="bg-green-600 text-white px-4 py-2 mt-2 rounded">
-          Pay Now
-        </button>
+        <form action="/api/checkout-session" method="POST">
+          <input type="hidden" name="bookingId" value={booking._id} />
+          <input type="hidden" name="title" value={booking.ticketTitle} />
+          <input type="hidden" name="price" value={booking.totalPrice} />
+          <button
+            type="submit"
+            className="bg-green-600 text-white px-4 py-2 mt-2 rounded"
+          >
+            Pay Now
+          </button>
+        </form>
       )}
 
       {isExpired && booking.status === "accepted" && (
