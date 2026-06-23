@@ -5,18 +5,40 @@ import { useState } from "react";
 import { useSession } from "@/lib/session/client-session";
 import { addTicket } from "@/lib/actions/tickets";
 
-
 const AddTicketForm = () => {
   const [loading, setLoading] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
   const { session } = useSession();
-//   console.log(session, "from form session");
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, reset } = useForm();
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    try {
+      const formData = new FormData();
+      formData.append("image", file);
+
+      const res = await fetch(
+        `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_API_KEY}`,
+        {
+          method: "POST",
+          body: formData,
+        },
+      );
+
+      const data = await res.json();
+
+      if (data?.success) {
+        setImageUrl(data.data.url);
+      } else {
+        alert("Image upload failed");
+      }
+    } catch (err) {
+      console.log("Upload error:", err);
+    }
+  };
 
   const onSubmit = async (data) => {
     try {
@@ -33,19 +55,18 @@ const AddTicketForm = () => {
         description: data.description,
         seatType: data.seatType,
         perks: data.perks || [],
-        image: data.image,
+        image: imageUrl, 
         vendorName: session?.user?.name,
         vendorEmail: session?.user?.email,
         status: "pending",
       };
-    //   console.log(ticketData  , 'from form ticket data');
 
       const res = await addTicket(ticketData);
-      // console.log(res)
 
       if (res?.ok) {
         alert("Ticket added successfully!");
         reset();
+        setImageUrl("");
       } else {
         alert("Failed to add ticket");
       }
@@ -92,6 +113,7 @@ const AddTicketForm = () => {
           <option value="train">Train</option>
           <option value="launch">Launch</option>
           <option value="flight">Flight</option>
+
         </select>
 
         {/* Price + Quantity */}
@@ -110,7 +132,7 @@ const AddTicketForm = () => {
           />
         </div>
 
-        {/* Date Time */}
+        {/* Date */}
         <input
           type="datetime-local"
           {...register("departureDateTime", { required: true })}
@@ -146,14 +168,36 @@ const AddTicketForm = () => {
             <input type="checkbox" value="Wifi" {...register("perks")} />
             Wifi
           </label>
+          <label>
+            <input type="checkbox" value="Lunch" {...register("perks")} />
+            Lunch
+          </label>
+          <label>
+            <input type="checkbox" value="Dinner" {...register("perks")} />
+            Dinner
+          </label>
+          <label>
+            <input type="checkbox" value="Snacks" {...register("perks")} />
+            Snacks
+          </label>
         </div>
 
-        {/* Image URL */}
-        <input
-          placeholder="Image URL (imgbb)"
-          {...register("image", { required: true })}
-          className="w-full border p-2 rounded"
-        />
+        {/* IMAGE UPLOAD */}
+        <div>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            className="w-full border p-2 rounded"
+          />
+
+          {imageUrl && (
+            <img
+              src={imageUrl}
+              className="w-32 h-32 object-cover mt-2 rounded"
+            />
+          )}
+        </div>
 
         {/* Vendor Info */}
         <div className="text-sm text-gray-500">
