@@ -3,7 +3,6 @@
 import Countdown from "../allTickets/CountDown";
 
 const BookingCard = ({ booking }) => {
-  console.log(booking, "from book card");
   const isExpired = new Date(booking.departureDateTime).getTime() < Date.now();
 
   const showCountdown = booking.status !== "rejected";

@@ -1,4 +1,8 @@
+"use client";
 import Link from "next/link";
+import { useState } from "react";
+import UpdateTicketForm from "./vendor/UpdateTicketForm";
+import { deleteTicket } from "@/lib/actions/tickets";
 
 const MyTicketCard = ({ ticket }) => {
   const {
@@ -13,8 +17,14 @@ const MyTicketCard = ({ ticket }) => {
     departureDateTime,
     status,
   } = ticket;
+  const [open, setOpen] = useState(false);
 
   const isRejected = status === "rejected";
+
+  const handleDelete = async (id) => {
+    await deleteTicket(id);
+    // window.location.reload();
+  };
 
   return (
     <div className="bg-white rounded-xl shadow-md overflow-hidden border">
@@ -52,18 +62,20 @@ const MyTicketCard = ({ ticket }) => {
         </div>
 
         <div className="flex gap-2 pt-3">
-          {/* <Link
-            href={`/dashboard/vendor/update-ticket/${_id}`}
-            className={`flex-1 text-center py-2 rounded-lg ${
+          <button
+            onClick={() => setOpen(true)}
+            disabled={isRejected}
+            className={`flex-1 py-2 rounded-lg ${
               isRejected
-                ? "bg-gray-300 cursor-not-allowed pointer-events-none"
-                : "bg-blue-600 text-white hover:bg-blue-700"
+                ? "bg-gray-300 cursor-not-allowed"
+                : "bg-blue-600 text-white"
             }`}
           >
             Update
-          </Link> */}
+          </button>
 
           <button
+            onClick={() => handleDelete(_id)}
             disabled={isRejected}
             className={`flex-1 py-2 rounded-lg ${
               isRejected
@@ -74,6 +86,26 @@ const MyTicketCard = ({ ticket }) => {
             Delete
           </button>
         </div>
+
+        {open && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+            <div className="bg-white w-full max-w-2xl p-6 rounded-xl relative">
+              {/* CLOSE */}
+              <button
+                onClick={() => setOpen(false)}
+                className="absolute top-2 right-2 text-black"
+              >
+                ✕
+              </button>
+
+              {/* FORM */}
+              <UpdateTicketForm
+                ticket={ticket}
+                onClose={() => setOpen(false)}
+              />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

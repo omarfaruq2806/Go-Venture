@@ -26,7 +26,6 @@ const Signup = () => {
         password: formData.password,
       };
 
-      console.log("Final User Data:", userData);
 
       // ✅ Better Auth API call (FIXED)
       const { data, error } = await authClient.signUp.email({
@@ -44,8 +43,6 @@ const Signup = () => {
         alert(error.message || "Signup failed");
         return;
       }
-
-      console.log("Signup Success:", data);
 
       alert("Account created successfully!");
     } catch (err) {

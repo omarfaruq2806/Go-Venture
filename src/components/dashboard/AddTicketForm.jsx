@@ -36,7 +36,6 @@ const AddTicketForm = () => {
         alert("Image upload failed");
       }
     } catch (err) {
-      console.log("Upload error:", err);
     }
   };
 
@@ -71,7 +70,7 @@ const AddTicketForm = () => {
         alert("Failed to add ticket");
       }
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     } finally {
       setLoading(false);
     }

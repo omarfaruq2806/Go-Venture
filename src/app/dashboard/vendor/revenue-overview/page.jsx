@@ -8,7 +8,6 @@ const RevenueOverview = async () => {
   const email = user?.email;
     const tickets = await getTickets(email);
   const revenue = await getTransectionsHistory("", email);
-  console.log(revenue, "vendor revenue");
   const totalSoldTicket = revenue.reduce(
     (total, item) => total + Number(item.quantity),
     0,
@@ -18,7 +17,6 @@ const RevenueOverview = async () => {
     0,
   );
 
-  console.log(tickets);
 
   return (
     <div>

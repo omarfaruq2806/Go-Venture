@@ -18,7 +18,7 @@ const SignIn = () => {
     try {
       setLoading(true);
 
-      console.log("Login Data:", formData);
+      ("Login Data:", formData);
 
       // 🔐 Auth API call (example)
       const res = await authClient.signIn.email({

@@ -6,7 +6,6 @@ import { useState } from "react";
 
 const BookingModal = ({ ticket, closeModal }) => {
   const { session } = useSession();
-  console.log(ticket, "from modal");
   const user = session?.user;
   const [quantity, setQuantity] = useState(1);
 
@@ -32,11 +31,9 @@ const BookingModal = ({ ticket, closeModal }) => {
       userEmail: user.email,
     };
 
-    console.log(bookingData);
 
     // later api call
     const res = await bookNow(bookingData);
-    console.log(res, "from modal  booking");
 
     closeModal();
   };

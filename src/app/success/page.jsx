@@ -22,12 +22,10 @@ export default async function Success({ searchParams }) {
   }
 
   if (status === "complete") {
-    console.log({ ...metadata, session_id }, "from success page");
     const res = await saveTransection({
       ...metadata,
       stripeSessionId: session_id,
     });
-    console.log(res, "from success page");
 
     return (
       <section id="success">

@@ -6,7 +6,6 @@ import React from "react";
 const UserTickets = async () => {
   const { user } = await getSession();
   const bookings = await getBookings(user.email);
-  console.log(bookings, "my bookings ");
   return (
     <div>
       <h1>your booked tickets page</h1>
