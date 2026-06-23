@@ -12,7 +12,8 @@ export async function POST(request) {
     const price = formData.get("price");
     const title = formData.get("title");
     const bookingId = formData.get("bookingId");
-    console.log({price , title , bookingId} , 'from route');
+    const ticketId = formData.get("ticketId");
+    const bookingQuantity = formData.get("quantity");
 
     // Create Checkout Sessions from body params.
     const session = await stripe.checkout.sessions.create({
@@ -31,10 +32,14 @@ export async function POST(request) {
         },
       ],
       metadata: {
+        bookingId: bookingId,
+        ticketId: ticketId,
         price: price,
         userId: userSession.user.id,
         userEmail: userSession.user.email,
         userName: userSession.user.name,
+        title: title,
+        quantity: bookingQuantity,
       },
       mode: "payment",
       success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,

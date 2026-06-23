@@ -38,6 +38,12 @@ const BookingCard = ({ booking }) => {
           <input type="hidden" name="bookingId" value={booking._id} />
           <input type="hidden" name="title" value={booking.ticketTitle} />
           <input type="hidden" name="price" value={booking.totalPrice} />
+          <input type="hidden" name="ticketId" value={booking.ticketId} />
+          <input
+            type="hidden"
+            name="quantity"
+            value={booking.bookingQuantity}
+          />
           <button
             type="submit"
             className="bg-green-600 text-white px-4 py-2 mt-2 rounded"
