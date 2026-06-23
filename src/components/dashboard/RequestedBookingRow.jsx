@@ -27,7 +27,7 @@ const RequestedBookingRow = ({ booking }) => {
 
       <td>{booking.ticketTitle}</td>
 
-      <td>{booking.quantity}</td>
+      <td>{booking.bookingQuantity}</td>
 
       <td>৳{booking.totalPrice}</td>
 

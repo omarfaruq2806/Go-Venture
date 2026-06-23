@@ -35,8 +35,7 @@ const AddTicketForm = () => {
       } else {
         alert("Image upload failed");
       }
-    } catch (err) {
-    }
+    } catch (err) {}
   };
 
   const onSubmit = async (data) => {
@@ -54,9 +53,10 @@ const AddTicketForm = () => {
         description: data.description,
         seatType: data.seatType,
         perks: data.perks || [],
-        image: imageUrl, 
+        image: imageUrl,
         vendorName: session?.user?.name,
         vendorEmail: session?.user?.email,
+        isAdvertised: false,
         status: "pending",
       };
 
@@ -112,7 +112,6 @@ const AddTicketForm = () => {
           <option value="train">Train</option>
           <option value="launch">Launch</option>
           <option value="flight">Flight</option>
-
         </select>
 
         {/* Price + Quantity */}

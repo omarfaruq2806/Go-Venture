@@ -29,8 +29,10 @@ const BookingModal = ({ ticket, closeModal }) => {
       vendorEmail: ticket.vendorEmail,
       userName: user.name,
       userEmail: user.email,
+      from: ticket.from,
+      to: ticket.to,
+      transportType: ticket.transportType,
     };
-
 
     // later api call
     const res = await bookNow(bookingData);

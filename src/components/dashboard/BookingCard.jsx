@@ -16,7 +16,7 @@ const BookingCard = ({ booking }) => {
       <h2 className="text-lg font-bold mt-2">{booking.ticketTitle}</h2>
 
       <p>
-        {booking.from} → {booking.to}
+        {booking.from} → {booking.to} hi
       </p>
 
       <p>Qty: {booking.bookingQuantity}</p>
@@ -24,6 +24,7 @@ const BookingCard = ({ booking }) => {
       <p>Total: ৳{booking.totalPrice}</p>
 
       <p>Status: {booking.status}</p>
+
 
       <p>Departure: {new Date(booking.departureDateTime).toLocaleString()}</p>
 
