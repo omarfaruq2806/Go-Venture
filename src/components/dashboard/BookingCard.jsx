@@ -3,6 +3,7 @@
 import Countdown from "../allTickets/CountDown";
 
 const BookingCard = ({ booking }) => {
+  console.log(booking, "from book card");
   const isExpired = new Date(booking.departureDateTime).getTime() < Date.now();
 
   const showCountdown = booking.status !== "rejected";
@@ -39,6 +40,7 @@ const BookingCard = ({ booking }) => {
           <input type="hidden" name="title" value={booking.ticketTitle} />
           <input type="hidden" name="price" value={booking.totalPrice} />
           <input type="hidden" name="ticketId" value={booking.ticketId} />
+          <input type="hidden" name="vendorEmail" value={booking.vendorEmail} />
           <input
             type="hidden"
             name="quantity"

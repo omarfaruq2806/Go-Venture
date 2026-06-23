@@ -14,6 +14,7 @@ export async function POST(request) {
     const bookingId = formData.get("bookingId");
     const ticketId = formData.get("ticketId");
     const bookingQuantity = formData.get("quantity");
+    const vendorEmail = formData.get("vendorEmail");
 
     // Create Checkout Sessions from body params.
     const session = await stripe.checkout.sessions.create({
@@ -38,6 +39,7 @@ export async function POST(request) {
         userId: userSession.user.id,
         userEmail: userSession.user.email,
         userName: userSession.user.name,
+        vendorEmail: vendorEmail,
         title: title,
         quantity: bookingQuantity,
       },
