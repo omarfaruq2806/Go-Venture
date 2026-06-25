@@ -7,6 +7,8 @@ const SearchBar = ({
   setSearchTo,
   transportType,
   setTransportType,
+  sortBy,
+  setSortBy,
 }) => {
   return (
     <div className="flex gap-4 mb-6">
@@ -34,6 +36,11 @@ const SearchBar = ({
         <option value="bus">Bus</option>
         <option value="train">Train</option>
         <option value="flight">Flight</option>
+      </select>
+      <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+        <option value="">Default</option>
+        <option value="low">Low to High</option>
+        <option value="high">High to Low</option>
       </select>
     </div>
   );

@@ -8,6 +8,7 @@ const TicketList = ({ tickets }) => {
   const [searchFrom, setSearchFrom] = useState("");
   const [searchTo, setSearchTo] = useState("");
   const [transportType, setTransportType] = useState("");
+  const [sortBy, setSortBy] = useState("");
 
   const filteredTickets = tickets.filter((ticket) => {
     const matchFrom = ticket.from
@@ -22,6 +23,16 @@ const TicketList = ({ tickets }) => {
     return matchFrom && matchTo && matchTransport;
   });
 
+  const sortedTickets = [...filteredTickets];
+
+  if (sortBy === "low") {
+    sortedTickets.sort((a, b) => a.price - b.price);
+  }
+
+  if (sortBy === "high") {
+    sortedTickets.sort((a, b) => b.price - a.price);
+  }
+
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-6">All Tickets</h1>
@@ -33,10 +44,12 @@ const TicketList = ({ tickets }) => {
         setSearchTo={setSearchTo}
         transportType={transportType}
         setTransportType={setTransportType}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
       />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {filteredTickets.map((ticket) => (
+        {sortedTickets.map((ticket) => (
           <TicketCard key={ticket._id} ticket={ticket} />
         ))}
       </div>
