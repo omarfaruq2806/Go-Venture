@@ -1,20 +1,14 @@
 // "use server";
+// import { auth } from "@/lib/core/auth";
+// import { headers } from "next/headers";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
-export const serverMutation = (path, data, method) => {
-  // console.log(data , 'from ..');
-  const res = fetch(`${baseUrl}${path}`, {
-    method: method,
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  return res;
-};
-
-export const serverFetch = async (path) => {
+export const protectedFetch = async (path) => {
+  // const token = await auth.api.getAccessToken({
+  //   headers: await headers(),
+  // });
+  // console.log(token, 'token');
   const res = await fetch(`${baseUrl}${path}`);
   const data = await res.json();
   return data;

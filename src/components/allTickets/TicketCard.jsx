@@ -1,40 +1,97 @@
 import Link from "next/link";
 
 const TicketCard = ({ ticket }) => {
+  const isLowStock = ticket.quantity <= 5;
+
   return (
-    <div className="border rounded-xl shadow-sm bg-white overflow-hidden hover:shadow-md transition">
-      {/* IMAGE */}
-      <img
-        src={ticket.image}
-        alt={ticket.title}
-        className="h-40 w-full object-cover"
-      />
+    <div className="card bg-base-100 shadow-sm border border-base-200 hover:shadow-md transition-all duration-200 overflow-hidden">
+      {/* IMAGE WITH ABSOLUTE BADGE */}
+      <figure className="relative h-44 w-full">
+        <img
+          src={ticket.image}
+          alt={ticket.title}
+          className="w-full h-full object-cover"
+        />
+        {/* ট্রান্সপোর্ট টাইপ ব্যাজ ছবির উপরে */}
+        <div className="absolute top-3 left-3">
+          <span className="badge badge-secondary font-semibold gap-1 text-xs py-2.5">
+            🚍 {ticket.transportType}
+          </span>
+        </div>
+      </figure>
 
       {/* CONTENT */}
-      <div className="p-4 space-y-2">
-        {/* TITLE */}
-        <h2 className="text-lg font-bold">{ticket.title}</h2>
+      <div className="card-body p-4 justify-between">
+        <div className="space-y-2">
+          {/* TITLE */}
+          <h2 className="card-title text-base font-bold text-base-content line-clamp-1">
+            {ticket.title}
+          </h2>
 
-        {/* ROUTE */}
-        <p className="text-sm text-gray-600">
-          {ticket.from} → {ticket.to}
-        </p>
+          {/* ROUTE */}
+          <div className="flex items-center gap-2 text-sm font-semibold text-primary bg-primary/5 px-2 py-1 rounded-md w-fit">
+            <span>📍 {ticket.from}</span>
+            <span className="text-xs opacity-60">➔</span>
+            <span>{ticket.to}</span>
+          </div>
 
-        {/* INFO */}
-        <div className="text-sm space-y-1 text-gray-700">
-          <p>🚍 {ticket.transportType}</p>
-          <p>💰 ৳{ticket.price} / per seat</p>
-          <p>🎟️ Quantity: {ticket.quantity}</p>
-          <p>🎁 Perks: {ticket.perks?.join(", ")}</p>
-          <p>⏰ {ticket.departureDateTime}</p>
+          {/* INFO DETAILS */}
+          <div className="text-xs space-y-1.5 pt-1 text-base-content/80">
+            {/* Price & Seats Left */}
+            <div className="flex justify-between items-center border-b border-base-200 pb-1.5">
+              <span className="text-sm font-extrabold text-success">
+                ৳{ticket.price}
+              </span>
+              <span
+                className={`badge ${isLowStock ? "badge-error text-error-content" : "badge-ghost"} badge-sm font-medium`}
+              >
+                🎟️ {ticket.quantity} Left
+              </span>
+            </div>
+
+            {/* Departure Time */}
+            <p className="flex items-center gap-1.5 mt-1 text-base-content/70">
+              <span className="text-sm">⏰</span>
+              {new Date(ticket.departureDateTime).toLocaleDateString([], {
+                month: "short",
+                day: "numeric",
+              })}{" "}
+              -{" "}
+              {new Date(ticket.departureDateTime).toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </p>
+
+            {/* Perks */}
+            {ticket.perks && ticket.perks.length > 0 && (
+              <div className="flex flex-wrap gap-1 pt-1.5">
+                {ticket.perks.slice(0, 2).map((perk, idx) => (
+                  <span
+                    key={idx}
+                    className="badge badge-outline text-[10px] uppercase tracking-wider opacity-70 px-1.5 py-2"
+                  >
+                    ✨ {perk}
+                  </span>
+                ))}
+                {ticket.perks.length > 2 && (
+                  <span className="badge badge-outline text-[10px] opacity-50 px-1.5 py-2">
+                    +{ticket.perks.length - 2}
+                  </span>
+                )}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* BUTTON */}
-        <Link href={`/tickets/${ticket._id}`}>
-          <button className="mt-3 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
-            See Details
-          </button>
-        </Link>
+        <div className="card-actions mt-4">
+          <Link href={`/tickets/${ticket._id}`} className="w-full">
+            <button className="btn btn-primary btn-sm btn-block text-white font-semibold rounded-lg shadow-sm shadow-primary/20 hover:shadow-none">
+              See Details
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

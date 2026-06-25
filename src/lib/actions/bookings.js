@@ -1,4 +1,4 @@
-import { serverMutation } from "../core/server";
+import { serverMutation } from "../core/mutation";
 
 export const bookNow = async (bookingData) => {
   return serverMutation("/api/bookings", bookingData, "POST");

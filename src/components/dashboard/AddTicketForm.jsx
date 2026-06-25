@@ -9,6 +9,7 @@ const AddTicketForm = () => {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const { session } = useSession();
+  console.log(session , 'add ticket');
 
   const { register, handleSubmit, reset } = useForm();
 

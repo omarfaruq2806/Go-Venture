@@ -1,4 +1,4 @@
-import { serverFetch } from "../core/server";
+import { serverFetch } from "../core/public";
 
 export const getBookings = async (
   userEmail = "",

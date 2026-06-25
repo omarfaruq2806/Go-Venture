@@ -2,64 +2,81 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white mt-10">
-      {/* Main Footer */}
-      <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer className="bg-neutral text-neutral-content">
+      {/* Main Footer Container */}
+      <div className="footer max-w-7xl mx-auto p-10 md:grid-cols-4">
         {/* Column 1 */}
-        <div>
-          <h2 className="text-xl font-bold mb-3">TicketBari</h2>
-          <p className="text-gray-300 text-sm">
+        <aside>
+          <h2 className="footer-title text-lg font-bold text-white opacity-100">
+            TicketBari
+          </h2>
+          <p className="max-w-xs text-neutral-content/80">
             Book bus, train, launch & flight tickets easily
           </p>
-        </div>
+        </aside>
 
         {/* Column 2 */}
-        <div>
-          <h3 className="font-semibold mb-3">Quick Links</h3>
-          <ul className="space-y-2 text-gray-300 text-sm">
-            <li>
-              <Link href="/">Home</Link>
-            </li>
-            <li>
-              <Link href="/tickets">All Tickets</Link>
-            </li>
-            <li>
-              <Link href="/contact">Contact Us</Link>
-            </li>
-            <li>
-              <Link href="/about">About</Link>
-            </li>
-          </ul>
-        </div>
+        <nav>
+          <h6 className="footer-title text-white opacity-90">Quick Links</h6>
+          <Link
+            href="/"
+            className="link link-hover text-neutral-content/80 hover:text-white"
+          >
+            Home
+          </Link>
+          <Link
+            href="/tickets"
+            className="link link-hover text-neutral-content/80 hover:text-white"
+          >
+            All Tickets
+          </Link>
+          <Link
+            href="/contact"
+            className="link link-hover text-neutral-content/80 hover:text-white"
+          >
+            Contact Us
+          </Link>
+          <Link
+            href="/about"
+            className="link link-hover text-neutral-content/80 hover:text-white"
+          >
+            About
+          </Link>
+        </nav>
 
         {/* Column 3 */}
-        <div>
-          <h3 className="font-semibold mb-3">Contact Info</h3>
-          <ul className="space-y-2 text-gray-300 text-sm">
-            <li>Email: support@ticketbari.com</li>
-            <li>Phone: +880 1234 567890</li>
-            <li>Facebook: fb.com/ticketbari</li>
-          </ul>
-        </div>
+        <nav>
+          <h6 className="footer-title text-white opacity-90">Contact Info</h6>
+          <span className="text-neutral-content/80">
+            Email: support@ticketbari.com
+          </span>
+          <span className="text-neutral-content/80">
+            Phone: +880 1234 567890
+          </span>
+          <span className="text-neutral-content/80">
+            Facebook: fb.com/ticketbari
+          </span>
+        </nav>
 
         {/* Column 4 */}
-        <div>
-          <h3 className="font-semibold mb-3">Payment Methods</h3>
-          <p className="text-gray-300 text-sm">
+        <nav>
+          <h6 className="footer-title text-white opacity-90">
+            Payment Methods
+          </h6>
+          <p className="text-neutral-content/80 mb-2">
             We accept secure payments via Stripe
           </p>
-
-          <div className="mt-3">
-            <span className="px-3 py-1 bg-blue-600 rounded text-sm">
-              Stripe
-            </span>
-          </div>
-        </div>
+          <span className="badge badge-primary font-semibold p-3 text-white">
+            Stripe
+          </span>
+        </nav>
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-gray-700 text-center py-4 text-sm text-gray-400">
-        © 2025 TicketBari. All rights reserved.
+      <div className="footer footer-center p-4 bg-base-300 text-base-content text-sm border-t border-base-content/10">
+        <aside>
+          <p>© {new Date().getFullYear()} TicketBari. All rights reserved.</p>
+        </aside>
       </div>
     </footer>
   );

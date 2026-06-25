@@ -1,8 +1,9 @@
-import { getTickets } from "@/lib/actions/tickets";
+
+import { getAllTickets } from "@/lib/actions/tickets";
 import React from "react";
 
 const AdvertisedTickets = async () => {
-  const tickets = await getTickets("", "", "true");
+  const tickets = await getAllTickets("approved", "true");
 
   return (
     <div className="max-w-6xl mx-auto p-6">
