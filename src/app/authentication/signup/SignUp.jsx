@@ -22,18 +22,13 @@ const Signup = () => {
         name: formData.name,
         email: formData.email,
         photo: formData.photo,
-        role: role,
+        // role: role,
         password: formData.password,
       };
 
 
       // ✅ Better Auth API call (FIXED)
       const { data, error } = await authClient.signUp.email({
-        // email: formData.email,
-        // password: formData.password,
-        // name: formData.name,
-        // image: formData.photo, // optional
-        // role,
         ...userData,
         plan: "free",
       });
@@ -131,7 +126,7 @@ const Signup = () => {
           </div>
 
           {/* Role Select */}
-          <div>
+          {/* <div>
             <select
               value={role}
               onChange={(e) => setRole(e.target.value)}
@@ -144,7 +139,7 @@ const Signup = () => {
             <p className="text-xs text-gray-400 mt-1">
               User = Book tickets | Vendor = Sell tickets
             </p>
-          </div>
+          </div> */}
 
           {/* Submit */}
           <button
