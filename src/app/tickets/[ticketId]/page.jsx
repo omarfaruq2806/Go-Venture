@@ -1,17 +1,29 @@
 import BookNowButton from "@/components/allTickets/BookNowButton";
 import Countdown from "@/components/allTickets/CountDown";
 import { getSingleTicket } from "@/lib/actions/tickets";
+import {
+  Bus,
+  Armchair,
+  Calendar,
+  MapPin,
+  ArrowRight,
+  Tag,
+  Building2,
+  Gift,
+  FileText,
+  AlertTriangle,
+} from "lucide-react";
+import React from "react";
 
 const TicketDetailsPage = async ({ params }) => {
   const { ticketId } = await params;
-
   const ticket = await getSingleTicket(ticketId);
 
   const isExpired = new Date(ticket.departureDateTime).getTime() < Date.now();
   const isSoldOut = ticket.quantity <= 0;
   const disableBooking = isExpired || isSoldOut;
 
-  // Status Badge Color Controller
+  // Status Badge Color Controller - Dark Mode Safe
   const getStatusBadgeClass = (status) => {
     switch (status) {
       case "approved":
@@ -24,188 +36,229 @@ const TicketDetailsPage = async ({ params }) => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-4 md:p-8 bg-base-100">
-      <div className="grid md:grid-cols-2 gap-8 items-start">
-        {/* Left Side - Image Gallery & Countdown */}
-        <div className="space-y-6">
-          <div className="relative rounded-2xl overflow-hidden shadow-lg border border-base-300">
-            <img
-              src={ticket.image}
-              alt={ticket.title}
-              className="w-full h-[300px] md:h-[450px] object-cover"
-            />
-            {/* Top-Left Absolute Status Badge */}
-            <div className="absolute top-4 left-4">
-              <span
-                className={`badge badge-lg font-semibold uppercase tracking-wider ${getStatusBadgeClass(ticket.status)}`}
-              >
-                {ticket.status}
-              </span>
-            </div>
-          </div>
-
-          {/* Countdown Card */}
-          <div className="card bg-primary text-primary-content shadow-md">
-            <div className="card-body p-5 flex flex-col items-center text-center">
-              <h3 className="font-bold text-lg flex items-center gap-2">
-                ⏳ Departure Countdown
-              </h3>
-              <div className="mt-2 w-full">
-                <Countdown departureDateTime={ticket.departureDateTime} />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Right Side - Ticket Specs & Booking */}
-        <div className="card bg-base-100 border border-base-300 shadow-xl">
-          <div className="card-body p-6 md:p-8">
-            {/* Title */}
-            <h1 className="card-title text-3xl font-extrabold text-base-content mb-2">
-              {ticket.title}
-            </h1>
-
-            {/* Route Stats Block */}
-            <div className="bg-base-200 p-4 rounded-xl flex items-center justify-between my-4 border border-base-300">
-              <div>
-                <span className="text-xs text-base-content/60 block uppercase font-bold">
-                  From
-                </span>
-                <span className="text-lg font-bold text-primary">
-                  📍 {ticket.from}
-                </span>
-              </div>
-              <div className="divider divider-horizontal text-base-content/30">
-                ➔
-              </div>
-              <div className="text-right">
-                <span className="text-xs text-base-content/60 block uppercase font-bold">
-                  To
-                </span>
-                <span className="text-lg font-bold text-secondary">
-                  {ticket.to} 🏁
-                </span>
-              </div>
-            </div>
-
-            {/* Ticket Info Grid */}
-            <div className="grid grid-cols-2 gap-4 my-4 text-sm">
-              <div className="bg-base-50 p-3 rounded-lg border border-base-200">
-                <span className="text-base-content/60 block">🚍 Transport</span>
-                <span className="font-semibold text-base-content">
-                  {ticket.transportType}
-                </span>
-              </div>
-              <div className="bg-base-50 p-3 rounded-lg border border-base-200">
-                <span className="text-base-content/60 block">💺 Seat Type</span>
-                <span className="font-semibold text-base-content">
-                  {ticket.seatType}
-                </span>
-              </div>
-              <div className="bg-base-50 p-3 rounded-lg border border-base-200">
-                <span className="text-base-content/60 block">
-                  🎟 Available Tickets
-                </span>
+    // Outer dynamic layout container frame
+    <div className="w-full bg-base-100 min-h-screen transition-colors duration-200">
+      <div className="max-w-7xl mx-auto p-4 md:p-8">
+        {/* Main Split Grid: 2 Columns */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Left Side Gallery & Countdown Matrix (Takes 5 columns) */}
+          <div className="lg:col-span-5 space-y-6">
+            <div className="relative rounded-2xl overflow-hidden shadow-md border border-base-200 bg-base-200/30">
+              <img
+                src={
+                  ticket.image ||
+                  "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=800"
+                }
+                alt={ticket.title}
+                className="w-full h-[280px] md:h-[400px] object-cover"
+              />
+              {/* Top-Left Absolute Status Badge */}
+              <div className="absolute top-4 left-4 z-10">
                 <span
-                  className={`font-bold ${ticket.quantity < 5 ? "text-error" : "text-success"}`}
+                  className={`badge badge-md md:badge-lg font-bold uppercase tracking-wider border-none py-3 px-4 ${getStatusBadgeClass(ticket.status)}`}
                 >
-                  {ticket.quantity} Left
-                </span>
-              </div>
-              <div className="bg-base-50 p-3 rounded-lg border border-base-200">
-                <span className="text-base-content/60 block">🏪 Vendor</span>
-                <span className="font-semibold text-base-content">
-                  {ticket.vendorName}
+                  {ticket.status}
                 </span>
               </div>
             </div>
 
-            {/* Departure Info */}
-            <div className="alert bg-base-200 border border-base-300 rounded-xl my-4 flex justify-start gap-3">
-              <span className="text-xl">🕒</span>
-              <div>
-                <h4 className="font-bold text-xs text-base-content/60 uppercase">
-                  Departure Time
-                </h4>
-                <p className="text-sm font-medium text-base-content">
-                  {new Date(ticket.departureDateTime).toLocaleString()}
-                </p>
-              </div>
-            </div>
-
-            {/* Perks Section */}
-            {ticket.perks && ticket.perks.length > 0 && (
-              <div className="mt-4">
-                <h3 className="font-bold text-sm text-base-content/70 mb-2 uppercase tracking-wide">
-                  🎁 Included Perks
+            {/* Countdown Card Widget Container */}
+            <div className="card bg-gradient-to-br from-primary to-primary-focus text-primary-content shadow-lg border border-primary/20">
+              <div className="card-body p-6 flex flex-col items-center text-center">
+                <h3 className="font-extrabold text-base md:text-lg flex items-center gap-2 tracking-wide">
+                  ⏳ Departure Countdown
                 </h3>
-                <div className="flex flex-wrap gap-2">
-                  {ticket.perks.map((perk, index) => (
-                    <div
-                      key={index}
-                      className="badge badge-outline badge-secondary font-medium px-3 py-3"
+                <div className="mt-3 w-full bg-base-100/10 backdrop-blur-sm rounded-xl p-4 border border-white/5">
+                  <Countdown departureDateTime={ticket.departureDateTime} />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Side Ticket Specs Sheet & Pricing Matrix (Takes 7 columns) */}
+          <div className="lg:col-span-7 card bg-base-100 border border-base-200 shadow-xl">
+            <div className="card-body p-5 md:p-8">
+              {/* Core Headings */}
+              <h1 className="text-2xl md:text-3xl font-black text-base-content tracking-tight leading-tight">
+                {ticket.title}
+              </h1>
+
+              {/* Connected Route Indicator Block */}
+              <div className="bg-base-200/60 p-4 rounded-xl flex items-center justify-between my-5 border border-base-200/80">
+                <div className="flex flex-col">
+                  <span className="text-[10px] text-base-content/50 uppercase font-black tracking-wider mb-1">
+                    Origin
+                  </span>
+                  <span className="text-base md:text-lg font-bold text-base-content flex items-center gap-1.5">
+                    <MapPin className="w-4 h-4 text-primary" /> {ticket.from}
+                  </span>
+                </div>
+
+                <div className="flex flex-col items-center flex-grow px-2">
+                  <div className="w-full flex items-center justify-center gap-1 text-base-content/30">
+                    <span className="h-[2px] bg-base-300 flex-grow max-w-[50px]"></span>
+                    <ArrowRight className="w-4 h-4 text-primary animate-pulse" />
+                    <span className="h-[2px] bg-base-300 flex-grow max-w-[50px]"></span>
+                  </div>
+                </div>
+
+                <div className="flex flex-col items-end">
+                  <span className="text-[10px] text-base-content/50 uppercase font-black tracking-wider mb-1">
+                    Destination
+                  </span>
+                  <span className="text-base md:text-lg font-bold text-base-content">
+                    {ticket.to} 🏁
+                  </span>
+                </div>
+              </div>
+
+              {/* Core Data Specifications Matrix Grid */}
+              <div className="grid grid-cols-2 gap-3.5 my-2">
+                <div className="bg-base-200/30 p-3.5 rounded-xl border border-base-200/80 flex items-start gap-3">
+                  <Bus className="w-5 h-5 text-primary mt-0.5" />
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-base-content/40 tracking-wider block">
+                      Transport
+                    </span>
+                    <span className="font-bold text-sm text-base-content mt-0.5 block">
+                      {ticket.transportType}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="bg-base-200/30 p-3.5 rounded-xl border border-base-200/80 flex items-start gap-3">
+                  <Armchair className="w-5 h-5 text-secondary mt-0.5" />
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-base-content/40 tracking-wider block">
+                      Seat Type
+                    </span>
+                    <span className="font-bold text-sm text-base-content mt-0.5 block">
+                      {ticket.seatType}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="bg-base-200/30 p-3.5 rounded-xl border border-base-200/80 flex items-start gap-3">
+                  <Tag className="w-5 h-5 text-success mt-0.5" />
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-base-content/40 tracking-wider block">
+                      Inventory
+                    </span>
+                    <span
+                      className={`font-extrabold text-sm mt-0.5 block ${ticket.quantity < 5 ? "text-error" : "text-success"}`}
                     >
-                      {perk}
-                    </div>
-                  ))}
+                      {ticket.quantity} Seats Left
+                    </span>
+                  </div>
+                </div>
+
+                <div className="bg-base-200/30 p-3.5 rounded-xl border border-base-200/80 flex items-start gap-3">
+                  <Building2 className="w-5 h-5 text-info mt-0.5" />
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-base-content/40 tracking-wider block">
+                      Vendor Fleet
+                    </span>
+                    <span className="font-bold text-sm text-base-content mt-0.5 block truncate max-w-[120px]">
+                      {ticket.vendorName}
+                    </span>
+                  </div>
                 </div>
               </div>
-            )}
 
-            <div className="divider my-4"></div>
-
-            {/* Pricing & Booking Area */}
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <span className="text-xs text-base-content/60 block uppercase font-bold">
-                  Total Price
-                </span>
-                <span className="text-3xl font-black text-primary">
-                  ৳{ticket.price}
-                </span>
+              {/* Exact Deployment Timing Alert Box */}
+              <div className="alert bg-base-200/80 border border-base-200/80 rounded-xl my-4 flex items-center justify-start gap-3.5 p-4">
+                <Calendar className="w-5 h-5 text-primary flex-shrink-0" />
+                <div>
+                  <h4 className="font-bold text-[10px] text-base-content/50 uppercase tracking-wider">
+                    Departure Schedule
+                  </h4>
+                  <p className="text-sm font-bold text-base-content mt-0.5">
+                    {new Date(ticket.departureDateTime).toLocaleDateString([], {
+                      weekday: "long",
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}{" "}
+                    at{" "}
+                    {new Date(ticket.departureDateTime).toLocaleTimeString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </p>
+                </div>
               </div>
-            </div>
 
-            {/* Error/Warning Notices */}
-            <div className="space-y-2 mb-2">
-              {isExpired && (
-                <div className="alert alert-error p-3 text-sm flex gap-2 rounded-lg">
-                  <span>⚠️ This trip has already departed.</span>
+              {/* Included Perks Block */}
+              {ticket.perks && ticket.perks.length > 0 && (
+                <div className="mt-5">
+                  <h3 className="font-extrabold text-xs text-base-content/60 mb-2.5 uppercase tracking-widest flex items-center gap-1">
+                    <Building2 className="w-3.5 h-3.5 text-primary" /> Amenities
+                    & Perks
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {ticket.perks.map((perk, index) => (
+                      <span
+                        key={index}
+                        className="badge badge-ghost font-bold text-xs tracking-wide py-3 px-3 bg-base-200 text-base-content/80 border border-base-300/50"
+                      >
+                        ✨ {perk}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               )}
-              {isSoldOut && !isExpired && (
-                <div className="alert alert-warning p-3 text-sm flex gap-2 rounded-lg">
-                  <span>🚫 No tickets available (Sold Out).</span>
-                </div>
-              )}
-            </div>
 
-            {/* Action Button */}
-            <BookNowButton
-              ticket={ticket}
-              disabled={disableBooking}
-              className={`btn btn-block text-lg font-bold ${
-                disableBooking
-                  ? "btn-disabled bg-base-300 text-base-content/40"
-                  : "btn-primary text-white shadow-lg shadow-primary/30 hover:shadow-none"
-              }`}
-            >
-              Book Now
-            </BookNowButton>
+              <div className="divider my-5 border-base-200"></div>
+
+              {/* Pricing Grid Row */}
+              <div className="flex items-center justify-between mb-5 bg-base-200/30 p-4 rounded-xl border border-base-200/50">
+                <div>
+                  <span className="text-[10px] text-base-content/50 uppercase font-black tracking-wider block">
+                    Fare per seat
+                  </span>
+                  <span className="text-3xl font-black text-primary mt-0.5 block">
+                    ৳{ticket.price ? ticket.price.toLocaleString("en-BD") : "0"}
+                  </span>
+                </div>
+              </div>
+
+              {/* Dynamic Boundary Error Status Warnings Panel */}
+              <div className="space-y-2 mb-4">
+                {isExpired && (
+                  <div className="alert alert-error bg-error/10 border-error/20 text-error p-3.5 text-sm flex gap-2 rounded-xl font-bold">
+                    <AlertTriangle className="w-4 h-4 flex-shrink-0" />
+                    <span>This trip has already departed. Booking closed.</span>
+                  </div>
+                )}
+                {isSoldOut && !isExpired && (
+                  <div className="alert alert-warning bg-warning/10 border-warning/20 text-warning p-3.5 text-sm flex gap-2 rounded-xl font-bold">
+                    <AlertTriangle className="w-4 h-4 flex-shrink-0" />
+                    <span>
+                      No tickets left! This schedule is completely sold out.
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              {/* Clean Client Component Trigger Layer */}
+              <BookNowButton ticket={ticket} disabled={disableBooking} />
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Bottom Section - Full Width Description */}
-      <div className="mt-12 card bg-base-100 border border-base-300 shadow-sm">
-        <div className="card-body p-6 md:p-8">
-          <h2 className="text-xl font-bold text-base-content mb-2 flex items-center gap-2">
-            📄 Trip Details & Description
-          </h2>
-          <div className="w-16 h-1 bg-primary rounded mb-4"></div>
-          <p className="text-base-content/80 leading-relaxed whitespace-pre-line">
-            {ticket.description}
-          </p>
+        {/* Extended Description Grid Section */}
+        <div className="mt-10 card bg-base-100 border border-base-200 shadow-sm overflow-hidden">
+          <div className="card-body p-6 md:p-8">
+            <h2 className="text-lg font-black text-base-content flex items-center gap-2 tracking-tight">
+              <FileText className="w-5 h-5 text-primary" /> Trip Policy &
+              Journey Specifications
+            </h2>
+            <div className="w-20 h-1 bg-primary rounded-full mt-1.5 mb-4"></div>
+            <p className="text-sm font-medium text-base-content/70 leading-relaxed whitespace-pre-line bg-base-200/20 p-4 rounded-xl border border-base-200/50">
+              {ticket.description ||
+                "No specific guidelines provided by the operator for this route."}
+            </p>
+          </div>
         </div>
       </div>
     </div>
