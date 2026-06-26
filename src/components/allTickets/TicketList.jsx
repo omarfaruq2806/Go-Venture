@@ -3,8 +3,18 @@
 import { useState } from "react";
 import SearchBar from "./SearchBar";
 import TicketCard from "./TicketCard";
+import Pagination from "./Pagination";
 
-const TicketList = ({ tickets }) => {
+const TicketList = ({ ticketsData }) => {
+  const tickets = ticketsData.data;
+  const currentPage = ticketsData.page;
+  const pages = ticketsData.totalPages;
+
+  const totalPages = [];
+  for (let i = 1; i <= pages; i++) {
+    totalPages.push(i);
+  }
+
   const [searchFrom, setSearchFrom] = useState("");
   const [searchTo, setSearchTo] = useState("");
   const [transportType, setTransportType] = useState("");
@@ -24,11 +34,9 @@ const TicketList = ({ tickets }) => {
   });
 
   const sortedTickets = [...filteredTickets];
-
   if (sortBy === "low") {
     sortedTickets.sort((a, b) => a.price - b.price);
   }
-
   if (sortBy === "high") {
     sortedTickets.sort((a, b) => b.price - a.price);
   }
@@ -53,6 +61,11 @@ const TicketList = ({ tickets }) => {
           <TicketCard key={ticket._id} ticket={ticket} />
         ))}
       </div>
+
+      <Pagination
+        totalPages={totalPages}
+        currentPage={currentPage}
+      ></Pagination>
     </div>
   );
 };

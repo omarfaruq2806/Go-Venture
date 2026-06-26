@@ -1,5 +1,5 @@
 // "use server";
-import {  serverMutation } from "../core/mutation";
+import { serverMutation } from "../core/mutation";
 import { serverFetch } from "../core/public";
 
 // add ticket by a vendor
@@ -24,9 +24,9 @@ export const getTickets = async (
 };
 
 // for public route
-export const getAllTickets = async (status = "", isAdvertised = "") => {
+export const getAllTickets = async (status = "", isAdvertised = "", page) => {
   return serverFetch(
-    `/api/tickets/public?status=${status}&isAdvertised=${isAdvertised}`,
+    `/api/tickets/public?status=${status}&isAdvertised=${isAdvertised}&page=${page}`,
   );
 };
 
