@@ -19,6 +19,7 @@ export const googleSignIn = async () => {
   });
 };
 
-export const signOut = () => {
-  return authClient.signOut();
+export const signOut = async () => {
+  const data = await authClient.signOut();
+  return data;
 };

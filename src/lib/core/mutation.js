@@ -2,9 +2,7 @@ import { authClient } from "@/lib/auth-client";
 const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export const serverMutation = async (path, data, method) => {
-  const {data:session} = await authClient.getSession();
-  // const token = await authClient.getToken();
-  console.log(session.session , "serverMutation");
+  // const {data:session} = await authClient.getSession();
   const res = await fetch(`${baseUrl}${path}`, {
     method: method,
     headers: {

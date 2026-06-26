@@ -4,7 +4,14 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { googleSignIn } from "@/lib/session/client-session";
-import { User, Mail, Image as ImageIcon, Lock, Shield, Loader2 } from "lucide-react";
+import {
+  User,
+  Mail,
+  Image as ImageIcon,
+  Lock,
+  Shield,
+  Loader2,
+} from "lucide-react";
 import Link from "next/link";
 
 const Signup = () => {
@@ -25,7 +32,7 @@ const Signup = () => {
         name: formData.name,
         email: formData.email,
         photo: formData.photo,
-        role: role, // FIX: Role object parameters activate kora holo request payload payload pass pipeline e
+        // role: role, // FIX: Role object parameters activate kora holo request payload payload pass pipeline e
         password: formData.password,
       };
 
@@ -53,10 +60,8 @@ const Signup = () => {
   return (
     // FIX: Full screen wrapper elements automatic dark mode adjustment balance korbe
     <div className="w-full min-h-screen bg-base-200 flex items-center justify-center p-4 transition-colors duration-200">
-      
       {/* Container Box */}
       <div className="w-full max-w-md bg-base-100 border border-base-200 p-6 md:p-8 rounded-2xl shadow-xl transition-all">
-        
         {/* Title Group */}
         <div className="text-center mb-6">
           <h2 className="text-2xl md:text-3xl font-black tracking-tight text-base-content">
@@ -69,7 +74,6 @@ const Signup = () => {
 
         {/* Form Grid */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          
           {/* Input: Name */}
           <div className="form-control w-full">
             <div className="relative flex items-center group">
@@ -82,7 +86,9 @@ const Signup = () => {
               />
             </div>
             {errors.name && (
-              <p className="text-error text-xs font-semibold mt-1 pl-1">⚠️ {errors.name.message}</p>
+              <p className="text-error text-xs font-semibold mt-1 pl-1">
+                ⚠️ {errors.name.message}
+              </p>
             )}
           </div>
 
@@ -104,7 +110,9 @@ const Signup = () => {
               />
             </div>
             {errors.email && (
-              <p className="text-error text-xs font-semibold mt-1 pl-1">⚠️ {errors.email.message}</p>
+              <p className="text-error text-xs font-semibold mt-1 pl-1">
+                ⚠️ {errors.email.message}
+              </p>
             )}
           </div>
 
@@ -120,7 +128,9 @@ const Signup = () => {
               />
             </div>
             {errors.photo && (
-              <p className="text-error text-xs font-semibold mt-1 pl-1">⚠️ {errors.photo.message}</p>
+              <p className="text-error text-xs font-semibold mt-1 pl-1">
+                ⚠️ {errors.photo.message}
+              </p>
             )}
           </div>
 
@@ -142,7 +152,9 @@ const Signup = () => {
               />
             </div>
             {errors.password && (
-              <p className="text-error text-xs font-semibold mt-1 pl-1">⚠️ {errors.password.message}</p>
+              <p className="text-error text-xs font-semibold mt-1 pl-1">
+                ⚠️ {errors.password.message}
+              </p>
             )}
           </div>
 
@@ -215,11 +227,13 @@ const Signup = () => {
         {/* Auth Route Redirect Option */}
         <p className="text-center text-sm font-medium text-base-content/70 mt-5">
           Already have an account?{" "}
-          <Link href="/authentication/signin" className="text-primary font-bold hover:underline ml-1">
+          <Link
+            href="/authentication/signin"
+            className="text-primary font-bold hover:underline ml-1"
+          >
             Login
           </Link>
         </p>
-        
       </div>
     </div>
   );
