@@ -1,91 +1,77 @@
 import React from "react";
 import Link from "next/link";
+import {SwiperSlider }from "./SwiperSlider"; 
 
 const Hero = () => {
   return (
-    <div className="bg-base-200 min-h-screen">
-      {/* Hero Section */}
-      <div className="hero bg-gradient-to-r from-primary to-secondary text-primary-content py-20">
-        <div className="hero-content text-center">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
-              Book Bus, Train, Flight & Launch Tickets Easily
+    <div className="bg-base-100 border-b-6 border-base-300">
+      <div className="relative w-full h-[500px] overflow-hidden pt-10">
+        <SwiperSlider />
+        <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/40 text-center">
+          <div className="max-w-2xl px-4">
+            <h1 className="text-5xl md:text-6xl font-black text-white mb-6 leading-tight">
+              Your Journey Begins <span className="text-primary">Here</span>
             </h1>
-            <p className="py-6 text-lg text-primary-content/80 max-w-xl mx-auto">
-              Fast, secure and simple ticket booking platform for everyone.
-            </p>
-            <div className="flex gap-4 justify-center">
-              <Link
-                href="/tickets"
-                className="btn btn-white text-primary font-bold hover:bg-base-100"
-              >
-                View Tickets
-              </Link>
-              <Link
-                href="/about"
-                className="btn btn-outline btn-white text-white"
-              >
-                Learn More
-              </Link>
-            </div>
+            <Link
+              href="/tickets"
+              className="btn btn-primary btn-lg rounded-full px-10 text-lg shadow-xl shadow-primary/20"
+            >
+              Explore Routes
+            </Link>
           </div>
         </div>
       </div>
 
-      {/* Features Section */}
-      <div className="max-w-6xl mx-auto px-6 py-20">
+      <div className="max-w-6xl mx-auto px-6 -mt-20 relative z-20">
         <div className="grid md:grid-cols-3 gap-6">
-          {/* Card 1 */}
-          <div className="card bg-base-100 shadow-xl border border-base-300 hover:shadow-2xl transition">
-            <div className="card-body">
-              <h2 className="card-title text-xl text-primary">
-                🚍 Bus Tickets
-              </h2>
-              <p className="text-base-content/70">
-                Book bus tickets across all major routes easily.
-              </p>
+          {[
+            {
+              title: "Bus Tickets",
+              icon: "🚍",
+              color: "text-primary",
+              desc: "Reliable bus services on all major routes.",
+            },
+            {
+              title: "Flight Tickets",
+              icon: "✈️",
+              color: "text-secondary",
+              desc: "Global connectivity at your fingertips.",
+            },
+            {
+              title: "Train & Launch",
+              icon: "🚆",
+              color: "text-accent",
+              desc: "Scenic journeys for a comfortable travel.",
+            },
+          ].map((item, idx) => (
+            <div
+              key={idx}
+              className="card bg-base-100 shadow-2xl border border-base-200 hover:-translate-y-2 transition-all duration-300"
+            >
+              <div className="card-body items-center text-center">
+                <div className="text-4xl mb-2">{item.icon}</div>
+                <h2 className={`card-title ${item.color}`}>{item.title}</h2>
+                <p className="text-base-content/70">{item.desc}</p>
+              </div>
             </div>
-          </div>
-
-          {/* Card 2 */}
-          <div className="card bg-base-100 shadow-xl border border-base-300 hover:shadow-2xl transition">
-            <div className="card-body">
-              <h2 className="card-title text-xl text-secondary">
-                ✈️ Flight Tickets
-              </h2>
-              <p className="text-base-content/70">
-                Find cheap and fast flight booking options.
-              </p>
-            </div>
-          </div>
-
-          {/* Card 3 */}
-          <div className="card bg-base-100 shadow-xl border border-base-300 hover:shadow-2xl transition">
-            <div className="card-body">
-              <h2 className="card-title text-xl text-accent">
-                🚆 Train & Launch
-              </h2>
-              <p className="text-base-content/70">
-                Comfortable train and launch ticket booking system.
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
-      {/* CTA Section */}
-      <div className="bg-neutral text-neutral-content py-16 text-center">
-        <div className="max-w-md mx-auto px-4">
-          <h2 className="text-3xl font-bold">Start Booking Your Ticket Now</h2>
-          <p className="text-neutral-content/70 mt-2">
-            Join thousands of users booking daily
-          </p>
-          <Link
-            href="/tickets"
-            className="btn btn-primary mt-6 text-white px-8"
-          >
-            Get Started
-          </Link>
+      <div className="py-20 text-center">
+        <div className="stats stats-vertical lg:stats-horizontal shadow-lg border border-base-200">
+          <div className="stat">
+            <div className="stat-title">Happy Travelers</div>
+            <div className="stat-value text-primary">10K+</div>
+          </div>
+          <div className="stat">
+            <div className="stat-title">Total Routes</div>
+            <div className="stat-value text-secondary">500+</div>
+          </div>
+          <div className="stat">
+            <div className="stat-title">Support</div>
+            <div className="stat-value text-accent">24/7</div>
+          </div>
         </div>
       </div>
     </div>

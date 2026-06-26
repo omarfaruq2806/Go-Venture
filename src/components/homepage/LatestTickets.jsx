@@ -9,7 +9,7 @@ const LatestTickets = async () => {
 
   return (
     // FULL WIDTH LAYER: bg-base-100 dark mode layout auto-sync korbe
-    <div className="w-full bg-base-100 transition-colors duration-200 border-b border-base-300">
+    <div className="w-full bg-base-100 transition-colors duration-200 border-b-6 border-base-300">
       <div className="max-w-7xl mx-auto px-4 py-12 md:py-16">
         {/* Header section - Dark Mode safe typography conversion */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-3">

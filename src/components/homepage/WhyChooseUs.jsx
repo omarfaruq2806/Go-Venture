@@ -32,7 +32,7 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <div className="w-full bg-base-100 transition-colors duration-200 border-b border-base-300">
+    <div className="w-full bg-base-100 transition-colors duration-200 border-b-6 border-base-300">
       <div className="max-w-7xl mx-auto px-4 py-16 md:py-24">
         <div className="text-center max-w-xl mx-auto mb-12">
           <div className="inline-flex items-center gap-1.5 bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full mb-3">

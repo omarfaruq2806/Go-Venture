@@ -15,7 +15,7 @@ const AdvertisedTickets = async () => {
   const tickets = ticketsData.data;
 
   return (
-    <div className="w-full bg-base-100 transition-colors duration-200 border-b border-base-300">
+    <div className="w-full bg-base-100 transition-colors duration-200 border-b-6 border-base-300">
       <div className="max-w-7xl mx-auto px-4 py-12 md:py-16">
         
         {/* Header section with pure dynamic colors */}
