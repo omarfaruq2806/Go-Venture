@@ -1,112 +1,107 @@
 "use client";
-import Link from "next/link";
+
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import UpdateTicketForm from "./vendor/UpdateTicketForm";
 import { deleteTicket } from "@/lib/actions/tickets";
+import { MapPin, Bus, Trash2, Edit2, X, AlertTriangle } from "lucide-react";
 
 const MyTicketCard = ({ ticket }) => {
-  const {
-    _id,
-    title,
-    image,
-    from,
-    to,
-    transportType,
-    price,
-    quantity,
-    departureDateTime,
-    status,
-  } = ticket;
+  const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const isRejected = status === "rejected";
+  const isRejected = ticket.status === "rejected";
 
   const handleDelete = async (id) => {
+    if (!confirm("Are you sure you want to remove this ticket?")) return;
+    setLoading(true);
     await deleteTicket(id);
-    // window.location.reload();
+    router.refresh();
+    setLoading(false);
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden border">
-      <img src={image} alt={title} className="w-full h-48 object-cover" />
-
-      <div className="p-4 space-y-2">
-        <h2 className="text-xl font-semibold">{title}</h2>
-
-        <p className="text-gray-600">
-          {from} → {to}
-        </p>
-
-        <div className="flex justify-between text-sm">
-          <span className="capitalize">{transportType}</span>
-          <span>${price}</span>
-        </div>
-
-        <div className="flex justify-between text-sm">
-          <span>Quantity: {quantity}</span>
-          <span>{new Date(departureDateTime).toLocaleDateString()}</span>
-        </div>
-
-        <div className="pt-2">
+    <div className="card bg-base-100 border border-base-200 shadow-lg hover:shadow-xl transition-all rounded-2xl overflow-hidden flex flex-col">
+      {/* Image */}
+      <figure className="h-44 w-full relative">
+        <img
+          src={ticket.image}
+          alt={ticket.title}
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute top-3 right-3">
           <span
-            className={`px-3 py-1 rounded-full text-xs font-medium ${
-              status === "approved"
-                ? "bg-green-100 text-green-700"
-                : status === "rejected"
-                  ? "bg-red-100 text-red-700"
-                  : "bg-yellow-100 text-yellow-700"
+            className={`badge border-none font-black text-[10px] uppercase ${
+              ticket.status === "approved"
+                ? "bg-success/10 text-success"
+                : ticket.status === "rejected"
+                  ? "bg-error/10 text-error"
+                  : "bg-warning/10 text-warning"
             }`}
           >
-            {status}
+            {ticket.status}
           </span>
         </div>
+      </figure>
 
-        <div className="flex gap-2 pt-3">
+      <div className="card-body p-5 flex flex-col flex-grow">
+        <h2 className="font-black text-lg truncate">{ticket.title}</h2>
+
+        <div className="flex items-center gap-1.5 text-xs font-bold text-base-content/70 my-2">
+          <MapPin className="w-3.5 h-3.5 text-primary" />
+          <span className="bg-base-200 px-2 py-0.5 rounded">{ticket.from}</span>
+          <span>➔</span>
+          <span className="bg-base-200 px-2 py-0.5 rounded">{ticket.to}</span>
+        </div>
+
+        <div className="grid grid-cols-2 gap-2 text-xs font-bold text-base-content/60 my-2">
+          <span className="flex items-center gap-1">
+            <Bus className="w-3.5 h-3.5" /> {ticket.transportType}
+          </span>
+          <span>Price: ৳{ticket.price}</span>
+        </div>
+
+        {/* Actions */}
+        <div className="card-actions mt-4 grid grid-cols-2 gap-2">
           <button
             onClick={() => setOpen(true)}
             disabled={isRejected}
-            className={`flex-1 py-2 rounded-lg ${
-              isRejected
-                ? "bg-gray-300 cursor-not-allowed"
-                : "bg-blue-600 text-white"
-            }`}
+            className="btn btn-primary btn-sm rounded-xl font-bold gap-1"
           >
-            Update
+            <Edit2 className="w-3.5 h-3.5" /> Update
           </button>
-
           <button
-            onClick={() => handleDelete(_id)}
-            disabled={isRejected}
-            className={`flex-1 py-2 rounded-lg ${
-              isRejected
-                ? "bg-gray-300 cursor-not-allowed"
-                : "bg-red-600 text-white hover:bg-red-700"
-            }`}
+            onClick={() => handleDelete(ticket._id)}
+            disabled={isRejected || loading}
+            className="btn btn-error btn-sm rounded-xl font-bold gap-1 text-white"
           >
-            Delete
+            {loading ? (
+              "..."
+            ) : (
+              <>
+                <Trash2 className="w-3.5 h-3.5" /> Delete
+              </>
+            )}
           </button>
         </div>
-
-        {open && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-            <div className="bg-white w-full max-w-2xl p-6 rounded-xl relative">
-              {/* CLOSE */}
-              <button
-                onClick={() => setOpen(false)}
-                className="absolute top-2 right-2 text-black"
-              >
-                ✕
-              </button>
-
-              {/* FORM */}
-              <UpdateTicketForm
-                ticket={ticket}
-                onClose={() => setOpen(false)}
-              />
-            </div>
-          </div>
-        )}
       </div>
+
+      {/* Modal - Modern Backdrop Blur */}
+      {open && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-base-100 w-full max-w-2xl p-6 rounded-2xl relative shadow-2xl border border-base-200">
+            <button
+              onClick={() => setOpen(false)}
+              className="absolute top-4 right-4 btn btn-circle btn-ghost btn-sm"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <h3 className="text-xl font-black mb-4">Update Schedule</h3>
+            <UpdateTicketForm ticket={ticket} onClose={() => setOpen(false)} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

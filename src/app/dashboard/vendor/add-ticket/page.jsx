@@ -6,7 +6,6 @@ const AddTicketPage = async () => {
   const session = await getSession();
   return (
     <div>
-      <h1>Add Ticket</h1>
       <AddTicketForm ></AddTicketForm>
     </div>
   );
