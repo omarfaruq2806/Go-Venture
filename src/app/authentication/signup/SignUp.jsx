@@ -26,7 +26,6 @@ const Signup = () => {
         password: formData.password,
       };
 
-
       // ✅ Better Auth API call (FIXED)
       const { data, error } = await authClient.signUp.email({
         ...userData,
@@ -46,6 +45,13 @@ const Signup = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const googleSignIn = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "/",
+    });
   };
 
   return (
@@ -152,7 +158,10 @@ const Signup = () => {
         </form>
 
         {/* Google */}
-        <button className="w-full border p-3 rounded-xl mt-4 hover:bg-gray-100">
+        <button
+          onClick={googleSignIn}
+          className="w-full border p-3 rounded-xl mt-4 hover:bg-gray-100"
+        >
           Continue with Google
         </button>
 

@@ -1,9 +1,9 @@
 import { getLatestTickets } from "@/lib/actions/tickets";
+import Link from "next/link";
 import React from "react";
 
 const LatestTickets = async () => {
-  const tickets = await getLatestTickets();
-
+  const tickets = await getLatestTickets("approved");
   const latestTickets = tickets.slice(0, 3);
 
   return (
@@ -31,6 +31,9 @@ const LatestTickets = async () => {
                 🆕 New
               </span>
             </div>
+            <Link href={`/tickets/${ticket._id}`}>
+              <button className="btn "> view</button>
+            </Link>
           </div>
         ))}
       </div>

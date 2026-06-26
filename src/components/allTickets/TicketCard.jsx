@@ -12,7 +12,7 @@ const TicketCard = ({ ticket }) => {
           alt={ticket.title}
           className="w-full h-full object-cover"
         />
-        {/* ট্রান্সপোর্ট টাইপ ব্যাজ ছবির উপরে */}
+        
         <div className="absolute top-3 left-3">
           <span className="badge badge-secondary font-semibold gap-1 text-xs py-2.5">
             🚍 {ticket.transportType}

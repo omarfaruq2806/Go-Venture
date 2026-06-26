@@ -30,7 +30,7 @@ const Users = ({ users }) => {
 
         <tbody>
           {users.map((user, index) => (
-            <tr key={user._id} className="hover">
+            <tr key={user.id} className="hover">
               <td>{index + 1}</td>
 
               <td className="font-medium">{user.name}</td>
