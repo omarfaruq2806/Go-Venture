@@ -12,6 +12,13 @@ export const useSession = () => {
   return { session, isPending, error, refetch };
 };
 
+export const googleSignIn = async () => {
+  const data = await authClient.signIn.social({
+    provider: "google",
+    callbackURL: "/",
+  });
+};
+
 export const signOut = () => {
   return authClient.signOut();
 };

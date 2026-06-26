@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { googleSignIn } from "@/lib/session/client-session";
 
 const SignIn = () => {
   const [loading, setLoading] = useState(false);
@@ -101,7 +102,10 @@ const SignIn = () => {
         </form>
 
         {/* Google */}
-        <button className="w-full border p-3 rounded-xl mt-4 hover:bg-gray-100">
+        <button
+          onClick={googleSignIn}
+          className="w-full border p-3 rounded-xl mt-4 hover:bg-gray-100"
+        >
           Continue with Google
         </button>
 

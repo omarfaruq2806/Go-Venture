@@ -73,9 +73,9 @@ const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="footer footer-center p-4 bg-base-300 text-base-content text-sm border-t border-base-content/10">
+      <div className="footer footer-center p-4bg-neutral text-neutral-content text-sm border-t border-base-content/10">
         <aside>
-          <p>© {new Date().getFullYear()} TicketBari. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} TicketBari. All rights reserved.</p>
         </aside>
       </div>
     </footer>

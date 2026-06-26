@@ -3,6 +3,7 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
+import { googleSignIn } from "@/lib/session/client-session";
 
 const Signup = () => {
   const [role, setRole] = useState("user");
@@ -45,13 +46,6 @@ const Signup = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const googleSignIn = async () => {
-    const data = await authClient.signIn.social({
-      provider: "google",
-      callbackURL: "/",
-    });
   };
 
   return (
