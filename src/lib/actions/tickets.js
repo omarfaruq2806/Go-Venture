@@ -41,6 +41,6 @@ export const deleteTicket = async (id) => {
 };
 
 // for getting newst tickets
-export const getLatestTickets = async (status="") => {
+export const getLatestTickets = async (status = "") => {
   return serverFetch(`/api/tickets/latest?status=${status}`);
 };

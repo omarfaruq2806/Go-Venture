@@ -32,7 +32,7 @@ const Signup = () => {
         name: formData.name,
         email: formData.email,
         photo: formData.photo,
-        // role: role, // FIX: Role object parameters activate kora holo request payload payload pass pipeline e
+        // role: role, 
         password: formData.password,
       };
 

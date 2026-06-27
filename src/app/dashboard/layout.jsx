@@ -1,22 +1,23 @@
-import React from "react";
-import DashboardSidebar from "../../components/dashboard/Sidebar";
+import MobileSidebar from "@/components/dashboard/MobileSidebar";
+import DashboardSidebar from "@/components/dashboard/Sidebar";
 
-const DashboardLayout = ({ children }) => {
+export default function Layout({ children }) {
   return (
-    // FULL SYSTEM BLOCK WRAPPER: bg-base-100 & text-base-content ensure korbe pura dash theme switch logic context
-    <div className="flex flex-col lg:flex-row min-h-screen bg-base-100 text-base-content transition-colors duration-200">
-      {/* Sidebar Wrapper Element Grid */}
-      <div className="flex-shrink-0">
+    <div className="min-h-screen lg:flex">
+      {/* Desktop Sidebar */}
+      <aside className="hidden lg:block lg:w-64 lg:flex-shrink-0">
         <DashboardSidebar />
-      </div>
+      </aside>
 
-      {/* Main Page Panel View Render Container */}
-      {/* w-full min-w-0 tracking system dynamic layout padding matching updates content flow line screen resolution box */}
-      <div className="flex-1 min-w-0 p-4 md:p-6 lg:p-8 overflow-y-auto">
+      {/* Mobile Sidebar */}
+      <MobileSidebar>
+        <DashboardSidebar />
+      </MobileSidebar>
+
+      {/* Content */}
+      <main className="flex-1 min-w-0 overflow-x-hidden p-4 lg:p-6">
         {children}
-      </div>
+      </main>
     </div>
   );
-};
-
-export default DashboardLayout;
+}

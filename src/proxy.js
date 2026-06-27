@@ -12,7 +12,6 @@ export async function proxy(request) {
     headers: request.headers,
   });
 
-  console.log({ session }, "proxy running");
 
   if (!session) {
     return NextResponse.redirect(

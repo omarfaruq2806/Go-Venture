@@ -14,6 +14,8 @@ const Navbar = () => {
   const user = session?.user;
   const role = user?.role;
 
+  console.log(user )
+
   // Active Link class conditional helper function
   const getLinkClass = (path) => {
     const isActive = pathname === path;
@@ -53,7 +55,7 @@ const Navbar = () => {
           {user && (
             <li>
               <Link
-                href={`/dashboard/${role}`}
+                href={`/dashboard/${role}/profile`}
                 className={getLinkClass(`/dashboard/${role}`)}
               >
                 Dashboard
@@ -111,7 +113,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <Link
-                      href="/dashboard/profile"
+                      href={`/dashboard/${role}/profile`}
                       className="font-medium hover:text-primary active:bg-primary/10"
                     >
                       My Profile

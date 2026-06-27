@@ -98,7 +98,18 @@ const DashboardSidebar = async () => {
 
   return (
     // FIX: bg-base-100 and border-base-200 controls light/dark mode framework seamlessly
-    <aside className="w-64 min-h-screen bg-base-100 border-r border-base-200 shadow-sm p-5 flex flex-col justify-between transition-colors duration-200">
+    <aside
+      className="min-h-screen
+    w-64
+    bg-base-100
+    border-r
+    border-base-200
+    shadow-sm
+    p-5
+    flex
+    flex-col
+    justify-between"
+    >
       <div>
         {/* Brand/Platform Header */}
         <div className="flex items-center gap-2 px-2 mb-8 border-b border-base-200 pb-4">

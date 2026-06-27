@@ -1,36 +1,226 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🚀 GoVenture - Online Ticket Booking Platform
 
-## Getting Started
+GoVenture is a full-stack **Online Ticket Booking Platform** built with the **MERN Stack**. The platform allows users to discover and book travel tickets such as **Bus, Train, Launch, and Plane** tickets. It also provides dedicated dashboards for **Users**, **Vendors**, and **Admins** with role-based access control.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🌐 Live Demo
+
+* **Live Website:** https://your-live-url.vercel.app
+* **Client Repository:** https://github.com/your-username/client-repo
+* **Server Repository:** https://github.com/your-username/server-repo
+
+---
+
+# 📖 Project Purpose
+
+The purpose of this project is to build a complete online ticket booking platform where users can search, filter, and purchase travel tickets securely. Vendors can manage and publish their own tickets, while administrators have full control over users, vendors, tickets, and advertisements.
+
+---
+
+# ✨ Key Features
+
+### 🔐 Authentication
+
+* Better Auth Authentication
+* Email & Password Login
+* Google Sign In
+* Protected Routes
+* Persistent Login Session
+
+### 👤 User Features
+
+* Browse all available tickets
+* Search tickets by destination
+* Filter by transport type
+* Sort tickets by price
+* Book tickets securely
+* Stripe Payment Integration
+* View Transaction History
+* Responsive User Dashboard
+
+### 🏪 Vendor Features
+
+* Add New Tickets
+* Manage Added Tickets
+* View Requested Bookings
+* Revenue Overview Dashboard
+* Cannot add tickets after being marked as Fraud
+
+### 👑 Admin Features
+
+* Manage Users
+* Promote Users to Vendor/Admin
+* Mark Vendor as Fraud
+* Manage Tickets
+* Advertise Featured Tickets
+* Role Based Dashboard
+
+### 🎨 UI Features
+
+* Fully Responsive Design
+* Dark & Light Theme Toggle
+* Pagination
+* Search & Filter
+* Modern Dashboard
+* Beautiful DaisyUI Components
+
+---
+
+# 🛠️ Tech Stack
+
+## Frontend
+
+* Next.js 16
+* React
+* Tailwind CSS v4
+* DaisyUI
+* Lucide React
+* React Hook Form
+* React Hot Toast
+
+## Backend
+
+* Express.js
+* MongoDB
+* Better Auth
+* Stripe
+
+---
+
+# 📦 NPM Packages Used
+
+### Frontend
+
+* better-auth
+* tailwindcss
+* daisyui
+* lucide-react
+* react-hook-form
+* react-hot-toast
+
+### Backend
+
+* express
+* mongodb
+* stripe
+* better-auth
+
+---
+
+# 🔑 Environment Variables
+
+## Client (.env.local)
+
+```env
+NEXT_PUBLIC_API_URL=
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
+BETTER_AUTH_URL=
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Server (.env)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```env
+PORT=
+MONGODB_URI=
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+BETTER_AUTH_SECRET=
+BETTER_AUTH_URL=
 
-## Learn More
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
 
-To learn more about Next.js, take a look at the following resources:
+STRIPE_SECRET_KEY=
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# 📂 Installation
 
-## Deploy on Vercel
+## Clone Client
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+git clone <client-repository-url>
+cd client
+npm install
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Clone Server
+
+```bash
+git clone <server-repository-url>
+cd server
+npm install
+npm run dev
+```
+
+---
+
+# 📱 User Roles
+
+### 👤 User
+
+* Book Tickets
+* View Transactions
+* Manage Profile
+
+### 🏪 Vendor
+
+* Add Tickets
+* Manage Tickets
+* Revenue Overview
+* Requested Bookings
+
+### 👑 Admin
+
+* Manage Users
+* Manage Tickets
+* Advertise Tickets
+* Mark Vendor as Fraud
+
+---
+
+# 💳 Payment Gateway
+
+Stripe Checkout has been integrated for secure online ticket payments.
+
+---
+
+# 🔒 Authentication
+
+Authentication is implemented using **Better Auth**, including:
+
+* Email & Password Authentication
+* Google OAuth Login
+* Session Management
+* Role Based Authorization
+
+---
+
+# 📈 Future Improvements
+
+* Ticket Cancellation
+* Refund System
+* Email Notifications
+* Seat Selection
+* Ticket QR Code
+* Real-time Booking Status
+* Wishlist
+* Multi-language Support
+
+---
+
+# 👨‍💻 Author
+
+**Md Omar Faruq**
+
+GitHub: https://github.com/your-username
+
+LinkedIn: https://linkedin.com/in/your-profile
+
+---
+
+# 📄 License
+
+This project is developed for educational and portfolio purposes.
