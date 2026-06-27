@@ -1,10 +1,10 @@
-import { serverFetch } from "../core/public";
+import { protectedFetch } from "../core/server";
 
 export const getTransectionsHistory = async (
   userEmail = "",
   vendorEmail = "",
 ) => {
-  return serverFetch(
+  return protectedFetch(
     `/api/transections?userEmail=${userEmail}&vendorEmail=${vendorEmail}`,
   );
 };

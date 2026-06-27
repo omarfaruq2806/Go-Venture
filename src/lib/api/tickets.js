@@ -1,4 +1,5 @@
 import { serverFetch } from "../core/public";
+import { protectedFetch } from "../core/server";
 
 // get ticket : 1: for vendor with mail ,  2: for admin without mail, 3 : for all ticket section with status , this is private route
 export const getTickets = async (
@@ -6,7 +7,7 @@ export const getTickets = async (
   status = "",
   isAdvertised = "",
 ) => {
-  return serverFetch(
+  return protectedFetch(
     `/api/tickets?vendorEmail=${email}&status=${status}&isAdvertised=${isAdvertised}`,
   );
 };
@@ -20,7 +21,7 @@ export const getAllTickets = async (status = "", isAdvertised = "", page) => {
 
 // for getting single ticket
 export const getSingleTicket = async (id) => {
-  return serverFetch(`/api/tickets/${id}`);
+  return protectedFetch(`/api/tickets/${id}`);
 };
 
 // for getting newst tickets
