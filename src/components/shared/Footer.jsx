@@ -8,7 +8,7 @@ const Footer = () => {
         {/* Column 1 */}
         <aside>
           <h2 className="footer-title text-lg font-bold text-white opacity-100">
-            TicketBari
+            Go Venture
           </h2>
           <p className="max-w-xs text-neutral-content/80">
             Book bus, train, launch & flight tickets easily

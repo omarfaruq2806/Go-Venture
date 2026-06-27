@@ -1,5 +1,5 @@
 import TicketList from "@/components/allTickets/TicketList";
-import { getAllTickets } from "@/lib/actions/tickets";
+import { getAllTickets } from "@/lib/api/tickets";
 
 const AllTicketsPage = async ({ searchParams }) => {
   const params = await searchParams;

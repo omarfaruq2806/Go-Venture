@@ -1,5 +1,5 @@
 import MyTicketCard from "@/components/dashboard/MyTicketCard";
-import { getTickets } from "@/lib/actions/tickets";
+import { getTickets } from "@/lib/api/tickets";
 import { getSession } from "@/lib/session/server-session";
 import { Tickets } from "lucide-react";
 import React from "react";

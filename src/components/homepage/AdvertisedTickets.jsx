@@ -1,4 +1,4 @@
-import { getAllTickets } from "@/lib/actions/tickets";
+
 import Link from "next/link";
 import {
   Bus,
@@ -9,6 +9,7 @@ import {
   Layers,
 } from "lucide-react";
 import React from "react";
+import { getAllTickets } from "@/lib/api/tickets";
 
 const AdvertisedTickets = async () => {
   const ticketsData = await getAllTickets("approved", "true");

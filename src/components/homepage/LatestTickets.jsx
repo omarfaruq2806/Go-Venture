@@ -1,4 +1,5 @@
-import { getLatestTickets } from "@/lib/actions/tickets";
+
+import { getLatestTickets } from "@/lib/api/tickets";
 import { Armchair, ArrowRight, Bus, Layers, Sparkles, Tag } from "lucide-react";
 import Link from "next/link";
 import React from "react";

@@ -1,5 +1,5 @@
 import ManageTicketsCard from "@/components/dashboard/admin/ManageTicketsCard";
-import { getTickets } from "@/lib/actions/tickets";
+import { getTickets } from "@/lib/api/tickets";
 import { TicketCheck } from "lucide-react";
 import React from "react";
 

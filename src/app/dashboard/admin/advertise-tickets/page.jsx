@@ -1,5 +1,5 @@
 import AdvertiseTicketTable from "@/components/dashboard/admin/AdvertiseTicketTable";
-import { getTickets } from "@/lib/actions/tickets";
+import { getTickets } from "@/lib/api/tickets";
 import { Megaphone } from "lucide-react";
 import React from "react";
 

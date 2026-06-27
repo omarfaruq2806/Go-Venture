@@ -1,5 +1,5 @@
 import Recharts from "@/components/dashboard/vendor/Recharts";
-import { getTickets } from "@/lib/actions/tickets";
+import { getTickets } from "@/lib/api/tickets";
 import { getTransectionsHistory } from "@/lib/api/transections";
 import { getSession } from "@/lib/session/server-session";
 import { Ticket, ShoppingCart, DollarSign, BarChart3 } from "lucide-react";

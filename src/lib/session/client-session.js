@@ -12,6 +12,15 @@ export const useSession = () => {
   return { session, isPending, error, refetch };
 };
 
+export const getClientToken = async () => {
+  const session = await authClient.getSession();
+  const token = session?.data?.session?.token;
+  if (!token) return {};
+  return {
+    Authorization: `Bearer ${token}`,
+  };
+};
+
 export const googleSignIn = async () => {
   const data = await authClient.signIn.social({
     provider: "google",

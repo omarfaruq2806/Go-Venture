@@ -1,6 +1,6 @@
 import BookNowButton from "@/components/allTickets/BookNowButton";
 import Countdown from "@/components/allTickets/CountDown";
-import { getSingleTicket } from "@/lib/actions/tickets";
+import { getSingleTicket } from "@/lib/api/tickets";
 import {
   Bus,
   Armchair,

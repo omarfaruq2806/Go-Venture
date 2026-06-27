@@ -2,11 +2,12 @@
 
 import { signOut, useSession } from "@/lib/session/client-session";
 import Link from "next/link";
-import { usePathname } from "next/navigation"; // Active route check korar jonno
+import { usePathname, useRouter } from "next/navigation"; // Active route check korar jonno
 import { useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
+  const router = useRouter();
   const { session } = useSession();
   const [open, setOpen] = useState(false);
   const pathname = usePathname(); // Ekhon pathname track korbe
@@ -14,7 +15,10 @@ const Navbar = () => {
   const user = session?.user;
   const role = user?.role;
 
-  console.log(user )
+  const handleSignOut = () => {
+    signOut();
+    router.push("/");
+  };
 
   // Active Link class conditional helper function
   const getLinkClass = (path) => {
@@ -34,8 +38,9 @@ const Navbar = () => {
           href="/"
           className="flex items-center gap-2 text-xl font-black tracking-tight text-primary hover:scale-[1.02] transition-transform"
         >
-          <span className="text-2xl">🚌</span>
-          <span className="font-extrabold">TicketBari</span>
+          <span className="text-2xl">
+            <img src="/logo.png" alt="Go Venture" className="w-12" />
+          </span>
         </Link>
       </div>
 
@@ -114,14 +119,14 @@ const Navbar = () => {
                   <li>
                     <Link
                       href={`/dashboard/${role}/profile`}
-                      className="font-medium hover:text-primary active:bg-primary/10"
+                      className="font-medium text-base-content/80 hover:text-primary hover:bg-base-200"
                     >
                       My Profile
                     </Link>
                   </li>
                   <li>
                     <button
-                      onClick={() => signOut()}
+                      onClick={handleSignOut}
                       className="font-semibold text-error hover:bg-error/10"
                     >
                       Logout

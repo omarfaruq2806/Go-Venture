@@ -97,9 +97,8 @@ const DashboardSidebar = async () => {
   const links = linksMap[role] || [];
 
   return (
-    // FIX: bg-base-100 and border-base-200 controls light/dark mode framework seamlessly
     <aside
-      className="min-h-screen
+      className="  h-full
     w-64
     bg-base-100
     border-r
@@ -108,16 +107,17 @@ const DashboardSidebar = async () => {
     p-5
     flex
     flex-col
-    justify-between"
+    justify-between
+    overflow-y-auto"
     >
       <div>
         {/* Brand/Platform Header */}
         <div className="flex items-center gap-2 px-2 mb-8 border-b border-base-200 pb-4">
-          <div className="p-2 bg-primary rounded-xl text-primary-content">
-            <LayoutDashboard className="w-5 h-5" />
+          <div className="p-2  rounded-xl ">
+            <img src="/logo.png" alt="goventure" className="bg-transparent w-10" />
           </div>
           <span className="font-black text-xl text-base-content tracking-tight">
-            Ticket<span className="text-primary">Bari</span>
+            Go<span className="text-primary">Venture</span>
           </span>
         </div>
 

@@ -1,12 +1,13 @@
-import { authClient } from "@/lib/auth-client";
+import { getClientToken } from "../session/client-session";
+
 const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export const serverMutation = async (path, data, method) => {
-  // const {data:session} = await authClient.getSession();
   const res = await fetch(`${baseUrl}${path}`, {
     method: method,
     headers: {
       "Content-Type": "application/json",
+      ...await getClientToken()
     },
     body: JSON.stringify(data),
   });
