@@ -2,11 +2,13 @@
 import { signOut } from "@/lib/session/client-session";
 import { LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function LogoutButton() {
   const router = useRouter();
   const handleSignOut = () => {
     const res = signOut();
+    toast.success("Logout successful!");
     router.push("/");
   };
   return (

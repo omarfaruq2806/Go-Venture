@@ -17,6 +17,7 @@ import {
   Loader2,
   CheckCircle2,
 } from "lucide-react";
+import toast from "react-hot-toast";
 
 const AddTicketForm = () => {
   const [loading, setLoading] = useState(false);
@@ -54,13 +55,13 @@ const AddTicketForm = () => {
       if (data?.success) {
         setImageUrl(data.data.url);
       } else {
-        alert(
+        toast.error(
           "Image optimization or upload server processing failed. Try again.",
         );
       }
     } catch (err) {
       console.error("Image file serialization block crash:", err);
-      alert("Network glitch caused upload system breakdown.");
+      toast.error("Network glitch caused upload system breakdown.");
     } finally {
       setImageUploading(false);
     }
@@ -68,7 +69,7 @@ const AddTicketForm = () => {
 
   const onSubmit = async (data) => {
     if (!imageUrl) {
-      alert(
+      toast.error(
         "Please upload a transport or destination cover image before saving.",
       );
       return;
@@ -98,19 +99,19 @@ const AddTicketForm = () => {
       const res = await addTicket(ticketData);
 
       if (res?.ok || res?.success) {
-        alert(
+        toast.success(
           "Success! Ticket has been queued and is awaiting admin approval validation.",
         );
         reset();
         setImageUrl("");
+
       } else {
-        alert(
+        toast.error(
           "Failed to securely deploy ticket record into database clusters.",
         );
       }
     } catch (err) {
-      console.error("Ticket data dispatch pipeline crash error:", err);
-      alert("An unexpected exception blocked data transmission.");
+      toast.error("An unexpected exception blocked data transmission.");
     } finally {
       setLoading(false);
     }

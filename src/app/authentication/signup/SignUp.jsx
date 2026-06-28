@@ -13,6 +13,7 @@ import {
   Loader2,
 } from "lucide-react";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 const Signup = () => {
   const [role, setRole] = useState("user");
@@ -44,14 +45,14 @@ const Signup = () => {
 
       if (error) {
         console.error("Signup Error:", error);
-        alert(error.message || "Signup failed");
+        toast.error(error.message || "Signup failed");
         return;
       }
 
-      alert("Account created successfully!");
+      toast.success("Account created successfully!");
     } catch (err) {
       console.error(err);
-      alert("Something went wrong!");
+      toast.error("Something went wrong!");
     } finally {
       setLoading(false);
     }

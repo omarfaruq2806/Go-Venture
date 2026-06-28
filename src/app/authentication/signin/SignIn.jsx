@@ -6,6 +6,7 @@ import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { googleSignIn } from "@/lib/session/client-session";
 import { Mail, Lock, Loader2, LogIn } from "lucide-react";
+import toast from "react-hot-toast";
 
 const SignIn = () => {
   const [loading, setLoading] = useState(false);
@@ -28,14 +29,14 @@ const SignIn = () => {
       });
 
       if (res?.error) {
-        alert(res.error.message || "Login failed");
+        toast.error(res.error.message || "Login failed");
         return;
       }
 
-      alert("Login successful!");
+      toast.success("Login successful!");
     } catch (err) {
       console.error(err);
-      alert("Something went wrong!");
+      toast.error("Something went wrong!");
     } finally {
       setLoading(false);
     }

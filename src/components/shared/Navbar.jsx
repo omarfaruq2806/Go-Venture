@@ -179,9 +179,9 @@ const Navbar = () => {
           </Link>
           {user && (
             <Link
-              href={`/dashboard/${role}`}
+              href={`/dashboard/${role}/profile`}
               onClick={() => setOpen(false)}
-              className={`btn btn-md justify-start w-full ${pathname === `/dashboard/${role}` ? "btn-primary text-primary-content" : "btn-ghost text-base-content/90 font-semibold"}`}
+              className={`btn btn-md justify-start w-full ${pathname === `/dashboard/${role}/profile` ? "btn-primary text-primary-content" : "btn-ghost text-base-content/90 font-semibold"}`}
             >
               Dashboard
             </Link>
@@ -227,14 +227,14 @@ const Navbar = () => {
                 </div>
               </div>
               <Link
-                href="/dashboard/profile"
+                href={`/dashboard/${role}/profile`}
                 onClick={() => setOpen(false)}
                 className={`btn btn-md justify-start w-full ${pathname === "/dashboard/profile" ? "btn-primary text-primary-content" : "btn-ghost text-base-content font-semibold"}`}
               >
                 My Profile
               </Link>
               <button
-                onClick={() => signOut()}
+                onClick={handleSignOut}
                 className="btn btn-error btn-outline btn-md w-full font-bold"
               >
                 Logout
