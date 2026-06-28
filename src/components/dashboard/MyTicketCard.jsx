@@ -46,7 +46,7 @@ const MyTicketCard = ({ ticket }) => {
       </figure>
 
       <div className="card-body p-5 flex flex-col flex-grow">
-        <h2 className="font-black text-lg truncate">{ticket.title}</h2>
+        <h2 className="text-lg truncate font-bold text-base-content">{ticket.title}</h2>
 
         <div className="flex items-center gap-1.5 text-xs font-bold text-base-content/70 my-2">
           <MapPin className="w-3.5 h-3.5 text-primary" />
@@ -97,7 +97,6 @@ const MyTicketCard = ({ ticket }) => {
             >
               <X className="w-5 h-5" />
             </button>
-            <h3 className="text-xl font-black mb-4">Update Schedule</h3>
             <UpdateTicketForm ticket={ticket} onClose={() => setOpen(false)} />
           </div>
         </div>

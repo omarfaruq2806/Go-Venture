@@ -6,9 +6,9 @@ GoVenture is a full-stack **Online Ticket Booking Platform** built with the **ME
 
 ## 🌐 Live Demo
 
-* **Live Website:** https://your-live-url.vercel.app
-* **Client Repository:** https://github.com/your-username/client-repo
-* **Server Repository:** https://github.com/your-username/server-repo
+* **Live Website:** https://go-venture-kappa.vercel.app/
+* **Client Repository:** https://github.com/omarfaruq2806/Go-Venture
+* **Server Repository:** https://github.com/omarfaruq2806/goventure-server
 
 ---
 
@@ -215,9 +215,9 @@ Authentication is implemented using **Better Auth**, including:
 
 **Md Omar Faruq**
 
-GitHub: https://github.com/your-username
+GitHub: https://github.com/omarfaruq2806
 
-LinkedIn: https://linkedin.com/in/your-profile
+LinkedIn: https://linkedin.com/in/omarfaruk28/
 
 ---
 

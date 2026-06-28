@@ -15,6 +15,7 @@ export const useSession = () => {
 export const getClientToken = async () => {
   const session = await authClient.getSession();
   const token = session?.data?.session?.token;
+  console.log(token, "from client session");
   if (!token) return {};
   return {
     Authorization: `Bearer ${token}`,
