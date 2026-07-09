@@ -71,9 +71,9 @@ The purpose of this project is to build a complete online ticket booking platfor
 
 ## Frontend
 
-* Next.js 16
+* Next.js
 * React
-* Tailwind CSS v4
+* Tailwind CSS
 * DaisyUI
 * Lucide React
 * React Hook Form
